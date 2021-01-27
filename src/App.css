@@ -1,0 +1,61 @@
+body{
+  margin: 0 auto;
+}
+
+#root{
+  width: 96%;
+  margin: 0 auto;
+}
+
+nav a{
+  margin-right: 1rem;
+}
+
+section{
+  padding: 2rem 2rem;
+  border: 1px solid lightgray
+}
+
+a.create{
+  background: lightgray;
+  padding: 8px 16px;
+  display: block;
+}
+
+label{
+  display: block;
+  margin: 1rem 0;
+}
+
+input, select{
+  display: block;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media screen and (min-width: 375px){
+  #root{
+    max-width: 560px;
+  }
+}
+
+@media screen and (min-width: 768px){
+  #root{
+    max-width: 960px;
+  }
+  .container{
+    display: flex;
+    flex-direction: row;
+  }
+  .editor{
+    width: 50%;
+  }
+  
+  iframe{
+    width: 50%;
+  }
+}
