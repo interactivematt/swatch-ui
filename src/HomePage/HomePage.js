@@ -18,7 +18,7 @@ export default class HomePage extends React.Component {
 }
 
 function Main() {
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
   return (
     <Switch>
       <Route
