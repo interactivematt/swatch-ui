@@ -3,7 +3,7 @@ import React from 'react';
 export default class Form extends React.Component {
   render(){
     return(
-      <form className='Form' className='editor'>
+      <form className='Form'>
         <label>
           Primary color
           <input type='text' placeholder='000000'/>
