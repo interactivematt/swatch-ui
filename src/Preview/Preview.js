@@ -1,5 +1,5 @@
 import React from 'react';
-import Frame, { FrameContextConsumer } from 'react-frame-component'
+import Frame from 'react-frame-component'
 
 export default class Preview extends React.Component {
   render(){
