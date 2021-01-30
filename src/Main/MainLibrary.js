@@ -8,7 +8,7 @@ export default class MainEmpty extends React.Component {
         <h2>Get started</h2>
         <h4>Click to create a new swatch.</h4>
         <article>
-          <Link to='./editor' class="create">Create New</Link>
+          <Link to='./editor' className="create">Create New</Link>
         </article>
       </section>
     )

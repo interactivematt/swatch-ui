@@ -22,6 +22,10 @@ a.create{
   display: block;
 }
 
+iframe #document html body:last-child{
+  display: none;
+}
+
 label{
   display: block;
   margin: 1rem 0;
@@ -36,6 +40,7 @@ input, select{
   flex-direction: column;
   width: 100%;
 }
+
 
 @media screen and (min-width: 375px){
   #root{

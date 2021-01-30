@@ -1,15 +1,15 @@
 import React from 'react';
 import Form from '../Form/Form'
-import Frame from 'react-frame'
+import Preview from '../Preview/Preview'
 
 export default class MainEditor extends React.Component {
   render(){
     return(
       <section className='MainEditor'>
         <h2>Your swatch</h2>
-        <div class='container'>
+        <div className='container'>
           <Form></Form>
-          <Frame styleSheets={['frame1.css']} css={'body{background-color:#eee;}'}></Frame>
+          <Preview></Preview>
         </div>
       </section>
   )}
