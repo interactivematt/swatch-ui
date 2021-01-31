@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from '../Form/Form'
+import EditSwatch from '../EditSwatch/EditSwatch'
 import Preview from '../Preview/Preview'
 import ApiContext from '../ApiContext'
 import { Link } from 'react-router-dom'
@@ -45,17 +45,12 @@ export default class SwatchDetail extends React.Component {
     const { swatches=[] } = this.context
     const { swatchId } = this.props.match.params
     const swatch = findSwatch(swatches, parseInt(swatchId)) || {content: ''}
-    console.log(swatch)
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     return(
       <section className='MainEditor'>
         <Link to='/'>Back</Link>
         <h2>{swatch.name}</h2>
         <div className='container'>
-          <Form
+          <EditSwatch
             id={swatch.id}
             name={swatch.name}
             color_primary={swatch.color_primary}

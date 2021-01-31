@@ -13,9 +13,10 @@ class App extends Component {
   state = {
     swatches: [],
     users: [],
-  };
+    activeFontFamily: "Georgia",
+  }
 
-  setSwatches = swatches => {
+  setSwatches = (swatches) => {
     this.setState({
       swatches,
       error: null,
@@ -23,6 +24,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     Promise.all([
       fetch(`${config.API_ENDPOINT}/swatches`, {
         method: 'GET',
@@ -46,6 +48,7 @@ class App extends Component {
       .catch(error => {
         console.error({ error })
       })
+    
   }
 
   renderPages(){

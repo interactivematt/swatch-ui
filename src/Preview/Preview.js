@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import Frame from 'react-frame-component'
-=======
 import React from 'react'
 import ApiContext from '../ApiContext'
->>>>>>> Stashed changes
 
 export default class Preview extends React.Component {
   static defaultProps = {
@@ -35,13 +30,13 @@ export default class Preview extends React.Component {
     const { primaryColorStyle, secondaryColorStyle } = styles;
 
     return(
-    <Frame className='Preview'>
-      <div className='ui'>
+
+      <div className='apply-font ui'>
         <h2 className="header">This is a header</h2>
         <p className="title">This is a very long paragraph with text and stuff.</p>
         <div style={primaryColorStyle} className="color large"></div>
         <div style={secondaryColorStyle} className="color"></div>   
       </div>
-    </Frame>
+
   )}
 }
