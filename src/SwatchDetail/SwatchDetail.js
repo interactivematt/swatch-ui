@@ -4,7 +4,6 @@ import Preview from '../Preview/Preview'
 import ApiContext from '../ApiContext'
 import { Link } from 'react-router-dom'
 import {findSwatch} from '../swatches-helpers.js'
-import HomePage from '../HomePage/HomePage';
 
 export default class SwatchDetail extends React.Component {
   static defaultProps = {

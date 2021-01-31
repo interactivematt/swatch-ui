@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import ApiContext from '../ApiContext'
 import FontPicker from 'font-picker-react'
 import { SwatchesPicker } from 'react-color'
-import { findSwatch } from '../swatches-helpers.js'
 import config from '../config'
 
 export default class EditSwatch extends React.Component {
@@ -16,9 +15,9 @@ export default class EditSwatch extends React.Component {
     match: PropTypes.shape({
       params: PropTypes.object,
     }),
-    history: PropTypes.shape({
-      push: PropTypes.func,
-    }).isRequired,
+    // history: PropTypes.shape({
+    //  push: PropTypes.func,
+    // }).isRequired,
   };
 
   static contextType = ApiContext;
@@ -31,7 +30,7 @@ export default class EditSwatch extends React.Component {
       color_secondary: e.target['color-secondary'].value,
       font_primary: this.state.activeFontFamily,
     }
-    console.log(`Swatch submitted`)
+    console.log(`Swatch ${newSwatch.name} submitted`)
   }
 
   handlePrimaryColorInputOpen = () => {
