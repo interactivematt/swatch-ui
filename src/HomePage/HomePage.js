@@ -1,34 +1,23 @@
 import React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import MainLibrary from '../Main/MainLibrary'
-import MainEditor from '../Main/MainEditor'
-
+import Library from '../Library/Library'
+import ApiContext from '../ApiContext'
 
 export default class HomePage extends React.Component {
-  
+  static defaultProps = {
+    match: {
+      params: {}
+    }
+  }
+  static contextType = ApiContext
+
   render(){
     return(
       <>
-        <main className='App'>
-          <Main></Main>
+        <main className='HomePage'>
+          <Library/>
         </main>
       </>
     )
   }
 }
 
-function Main() {
-  let { path } = useRouteMatch();
-  return (
-    <Switch>
-      <Route
-        exact path={path}
-        component={MainLibrary}
-      />
-      <Route
-        path={`/editor`}
-        component={MainEditor}
-      />
-    </Switch>
-  )
-}

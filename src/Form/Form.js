@@ -29,6 +29,7 @@ export default class Form extends React.Component {
           </select>
         </label>
         <input type="submit" value="Submit" />
+        <input type="submit" value="Save Swatch" />
       </form>
     )
   }
