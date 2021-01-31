@@ -1,14 +1,46 @@
+<<<<<<< Updated upstream
 import React from 'react';
 import Frame from 'react-frame-component'
+=======
+import React from 'react'
+import ApiContext from '../ApiContext'
+>>>>>>> Stashed changes
 
 export default class Preview extends React.Component {
+  static defaultProps = {
+    history: {
+      push: () => { }
+    },
+  }
+
+  state = {
+    displayColorPicker: false
+  }
+
+  static contextType = ApiContext;
+  
   render(){
+
+    console.log(this.props.color_primary)
+    console.log(this.props.color_secondary)
+
+    const styles = {
+      primaryColorStyle: {
+        backgroundColor: `${this.props.color_primary}`
+      },
+      secondaryColorStyle: {
+        backgroundColor: `${this.props.color_secondary}`
+      }
+    }
+    const { primaryColorStyle, secondaryColorStyle } = styles;
+
     return(
     <Frame className='Preview'>
       <div className='ui'>
         <h2 className="header">This is a header</h2>
         <p className="title">This is a very long paragraph with text and stuff.</p>
-        <button value="Click me">Click Me</button>        
+        <div style={primaryColorStyle} className="color large"></div>
+        <div style={secondaryColorStyle} className="color"></div>   
       </div>
     </Frame>
   )}

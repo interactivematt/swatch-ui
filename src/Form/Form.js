@@ -1,5 +1,6 @@
 import React from 'react';
 
+<<<<<<< Updated upstream
 export default class Form extends React.Component {
   render(){
     return(
@@ -34,3 +35,15 @@ export default class Form extends React.Component {
     )
   }
 }
+=======
+export default function FrameForm(props) {
+  const { className, ...otherProps } = props
+  return (
+    <form
+      className={['form', className].join(' ')}
+      action='#'
+      {...otherProps}
+    />
+  )
+}
+>>>>>>> Stashed changes

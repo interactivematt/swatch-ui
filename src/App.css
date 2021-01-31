@@ -24,11 +24,20 @@ a.create{
 label{
   display: block;
   margin: 1rem 0;
+  width: 100%;
 }
 
 input, select{
   display: block;
-}
+  height: 2.5rem;
+  border-radius: 0.2rem;
+  border: 1px solid #c5c5c5;
+  width: 100%;
+  padding: 0 0.5rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  box-sizing: border-box;
+ }
 
 .container{
   display: flex;
@@ -36,6 +45,38 @@ input, select{
   width: 100%;
 }
 
+.form{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.color{
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+}
+
+.large{
+  width: 12rem;
+  height: 12rem;
+}
+
+#font-picker{
+  display: block;
+  width: auto;
+  box-shadow: none;
+}
+
+#font-picker .dropdown-button{
+  background: white;
+  box-shadow: none;
+  border: 1px solid #c5c5c5;
+  border-radius: 0.2rem;
+  height: 2.5rem;
+  padding: 0 16px;
+  width: 100%;
+  margin-top: 0.5rem;
+}
 
 @media screen and (min-width: 375px){
   #root{
@@ -51,11 +92,12 @@ input, select{
     display: flex;
     flex-direction: row;
   }
-  .Form{
-    width: 50%;
+  .form{
+    width: 33%;
+    margin: 1rem;
   }
-  
-  iframe{
-    width: 50%;
+  .ui{
+    width: 67%;
+    padding: 1rem;
   }
 }
