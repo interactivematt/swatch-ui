@@ -52,6 +52,7 @@ class App extends Component {
   }
 
   renderPages(){
+    console.log(`${config.API_ENDPOINT}`)
     return(
       <>
         <Route 
