@@ -49,7 +49,6 @@ export default class SwatchDetail extends React.Component {
     const { swatches=[] } = this.context
     const { swatchId } = this.props.match.params
     const swatch = findSwatch(swatches, parseInt(swatchId)) || {content: ''}
-    console.log(swatch.font_primary)
 
     return(
       <section className='MainEditor'>
@@ -85,7 +84,7 @@ export default class SwatchDetail extends React.Component {
                   color_primary={swatch.color_primary}
                   color_secondary={swatch.color_secondary}
                   font_primary={swatch.font_primary}
-                  value={swatch.value}
+                  
                 />}
               
             />

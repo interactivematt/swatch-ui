@@ -11,7 +11,6 @@ export default class EditSwatch extends React.Component {
       displayColorPicker: false
   }
   static defaultProps = {
-    onDeleteNote: () => {},
     history: {
       push: () => { }
     },
@@ -35,27 +34,23 @@ export default class EditSwatch extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     const swatchId = this.props.id
-    const newSwatch = {
-      name: e.target['swatch-name'].value,
-      color_primary: e.target['color-primary'].value,
-      color_secondary: e.target['color-secondary'].value,
-      font_primary: this.state.activeFontFamily,
-    }
+    const { id, name, color_primary, color_secondary, font_primary } = this.state
+    const newSwatch = { id, name, color_primary, color_secondary, font_primary }
+
     fetch(`${config.API_ENDPOINT}/swatches/${swatchId}`, {
       method: 'PATCH',
       body: JSON.stringify(newSwatch),
       headers: {
         'content-type': 'application/json',
         'authorization': `Bearer ${config.API_KEY}`
-      }
+      },
     })
     .then(res => {
       if (!res.ok)
         return res.json().then(error => Promise.reject(error))
     })
-    .then(() => {
-      this.resetFields(newSwatch)
-      this.context.updateSwatch(newSwatch)
+    .then(newSwatch => {
+      this.context.onUpdateSwatch(newSwatch)
       this.props.history.push('/')
     })
     .catch(error => {
@@ -65,7 +60,8 @@ export default class EditSwatch extends React.Component {
     console.log(`Swatch ${newSwatch.name} submitted`)
   }
 
-  handleClickDelete = e => {
+
+  handleClickDelete = () => {
     const swatchId = this.props.id
     fetch(`${config.API_ENDPOINT}/swatches/${swatchId}`, {
       method: 'DELETE',
@@ -74,21 +70,19 @@ export default class EditSwatch extends React.Component {
         'Authorization': `Bearer ${config.API_KEY}`
       },
     })
-    .then(res => {
-      if (!res.ok)
-        return res.json().then(e => Promise.reject(e))
-      return res.json()
-    })
-    .then(() => {
-      this.context.deleteSwatch(swatchId)
-      // allow parent to perform extra behaviour
-      this.props.onDeleteSwatch(swatchId)
-      this.props.history.push(`/`);
-    })
-    .catch(error => {
-      console.error({ error })
-    })
-    console.log(`Swatch ${this.props.name} deleted`)
+      .then(res => {
+        if (!res.ok)
+          return res.json().then(e => Promise.reject(e))
+        return res.json()
+      })
+      .then(() => {
+        this.context.deleteSwatch(swatchId)
+        // allow parent to perform extra behaviour
+        this.props.history.push(`/`)
+      })
+      .catch(error => {
+        console.error({ error })
+      })
   }
 
   handlePrimaryColorInputOpen = () => {
@@ -194,8 +188,7 @@ export default class EditSwatch extends React.Component {
         <button
           onClick={() => {
             this.handleClickDelete(
-              this.props.id,
-              this.context.deleteSwatch,
+              this.props.id
             )
           }}
           type='button'

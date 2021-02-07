@@ -11,13 +11,39 @@ import './App.css'
 class App extends Component {
   state = {
     swatches: [],
+    error: null,
   }
 
-  setSwatches = (swatches) => {
+  setSwatches = ([ swatches ]) => {
     this.setState({
       swatches,
       error: null,
     })
+  }
+
+  addSwatch = swatch => {
+    this.setState({
+      swatches: [
+        ...this.state.swatches,
+        swatch
+      ]
+    })
+  };
+
+  updateSwatch = updatedSwatch => {
+    this.setState({
+      swatches: this.state.swatches.map(swatch =>
+        (swatch.id !== updatedSwatch.id) ? swatch : updatedSwatch
+      )
+    })
+  }
+
+  deleteSwatch = swatchId => {
+    const newSwatches = this.state.swatches.filter(swatch => swatch.id !== swatchId)
+    this.setState({
+      swatches: newSwatches
+    })
+    console.log(swatchId)
   }
 
   componentDidMount() {
@@ -31,44 +57,21 @@ class App extends Component {
       }),
     ])
       .then(([swatchesRes]) => {
-        if(!swatchesRes.ok)
+        if(!swatchesRes.ok) {
           return swatchesRes.json().then(e => Promise.reject(e))
-
+        }
         return Promise.all([
           swatchesRes.json(),
         ])
       })
-      .then(([swatches]) => {
-        this.setState({ swatches })
-      })
+      .then(this.setSwatches)
       .catch(error => {
         console.error({ error })
+        this.setState({ error })
       })
     
   };
 
-  handleAddSwatch = swatch => {
-    this.setState({
-      swatches: [
-        ...this.state.swatches,
-        swatch
-      ]
-    })
-  };
-
-  handleUpdateSwatch = swatch => {
-    this.setState({
-      swatches: this.state.swatches.map(sw =>
-        (sw.id !== swatch.id) ? sw : swatch
-      )
-    })
-  }
-
-  handleDeleteSwatch = swatchId => {
-    this.setState({
-      swatches: this.state.swatches.filter(swatch => swatch.id !== swatchId)
-    })
-  }
 
   renderPages(){
     return(
@@ -95,11 +98,12 @@ class App extends Component {
   }
 
   render(){
+    console.log(this.state)
     const value = {
       swatches: this.state.swatches,
-      addSwatch: this.handleAddSwatch,
-      updateSwatch: this.handleUpdateSwatch,
-      deleteSwatch: this.handleDeleteSwatch,
+      addSwatch: this.addSwatch,
+      updateSwatch: this.updateSwatch,
+      deleteSwatch: this.deleteSwatch,
     }
     return(
       <ApiContext.Provider value={value}>

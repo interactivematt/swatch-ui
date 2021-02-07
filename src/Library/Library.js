@@ -5,14 +5,13 @@ import { Link } from 'react-router-dom'
 
 export default class Library extends React.Component {
   static defaultProps = {
-    match: {
-      params: {}
-    }
+    swatches: []
   }
+
   static contextType = ApiContext
 
   render(){
-    const { swatches=[] } = this.context
+    const { swatches } = this.context
     return(
       <section className='Library'>
         <div className="swatchGrid">
