@@ -17,7 +17,7 @@ export default class Library extends React.Component {
       <section className='Library'>
         <div className="swatchGrid">
           <Link to='/swatch/new' className={'swatchCard'}>
-            <h1>+</h1>
+            <h2>+</h2>
             <h4>Create new swatch</h4>
           </Link>
           {swatches.reverse().map(swatch =>
