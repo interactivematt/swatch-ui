@@ -1,6 +1,7 @@
 import React from 'react';
 import Swatch from '../Swatch/Swatch'
 import ApiContext from '../ApiContext'
+import { Link } from 'react-router-dom'
 
 export default class Library extends React.Component {
   static defaultProps = {
@@ -12,17 +13,21 @@ export default class Library extends React.Component {
 
   render(){
     const { swatches=[] } = this.context
-    
     return(
       <section className='Library'>
-        <h2>Library</h2>
-        {swatches.map(swatch =>
-          <li key={swatch.id}>
-            <Swatch 
-              id={swatch.id}
-            />
-          </li>
-        )}
+        <div className="swatchGrid">
+          <Link to='/swatch/new' className={'swatchCard'}>
+            <h1>+</h1>
+            <h4>Create new swatch</h4>
+          </Link>
+          {swatches.reverse().map(swatch =>
+            <Link to={`/swatch/${swatch.id}`} key={swatch.id} className={'swatchLink'}>
+              <Swatch 
+                id={swatch.id}
+              />
+            </Link>
+          )}
+        </div>
       </section>
     )
   }

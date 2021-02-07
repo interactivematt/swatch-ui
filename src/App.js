@@ -5,15 +5,12 @@ import SwatchDetail from './SwatchDetail/SwatchDetail'
 import Login from './Login/Login'
 import SignUp from './SignUp/SignUp'
 import ApiContext from './ApiContext'
-import Nav from './Nav/Nav'
 import config from './config'
 import './App.css'
 
 class App extends Component {
   state = {
     swatches: [],
-    users: [],
-    activeFontFamily: "Georgia",
   }
 
   setSwatches = (swatches) => {
@@ -24,7 +21,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-
     Promise.all([
       fetch(`${config.API_ENDPOINT}/swatches`, {
         method: 'GET',
@@ -49,10 +45,32 @@ class App extends Component {
         console.error({ error })
       })
     
+  };
+
+  handleAddSwatch = swatch => {
+    this.setState({
+      swatches: [
+        ...this.state.swatches,
+        swatch
+      ]
+    })
+  };
+
+  handleUpdateSwatch = swatch => {
+    this.setState({
+      swatches: this.state.swatches.map(sw =>
+        (sw.id !== swatch.id) ? sw : swatch
+      )
+    })
+  }
+
+  handleDeleteSwatch = swatchId => {
+    this.setState({
+      swatches: this.state.swatches.filter(swatch => swatch.id !== swatchId)
+    })
   }
 
   renderPages(){
-    console.log(`${config.API_ENDPOINT}`)
     return(
       <>
         <Route 
@@ -78,12 +96,17 @@ class App extends Component {
 
   render(){
     const value = {
-      swatches: this.state.swatches
+      swatches: this.state.swatches,
+      addSwatch: this.handleAddSwatch,
+      updateSwatch: this.handleUpdateSwatch,
+      deleteSwatch: this.handleDeleteSwatch,
     }
     return(
       <ApiContext.Provider value={value}>
-        <Nav></Nav>
-        <header><h1>swatch ui</h1></header>
+        <header>
+          <h2><a href='/'>swatch ui</a></h2>
+          <h4>Rapidly experiment with styling to generate quick swatches of your UI's look-and-feel.</h4>
+        </header>
         {this.renderPages()}
       </ApiContext.Provider>
     )

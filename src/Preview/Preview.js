@@ -16,9 +16,6 @@ export default class Preview extends React.Component {
   
   render(){
 
-    console.log(this.props.color_primary)
-    console.log(this.props.color_secondary)
-
     const styles = {
       primaryColorStyle: {
         backgroundColor: `${this.props.color_primary}`
@@ -30,13 +27,17 @@ export default class Preview extends React.Component {
     const { primaryColorStyle, secondaryColorStyle } = styles;
 
     return(
-
       <div className='apply-font ui'>
-        <h2 className="header">This is a header</h2>
+        <h6>H1</h6>
+        <h1 className="header">Aa</h1>
+        <h6>H3</h6>
+        <h3>This is an article.</h3>
+        <h6>Paragraph</h6>
         <p className="title">This is a very long paragraph with text and stuff.</p>
+        <h6>Primary</h6>
         <div style={primaryColorStyle} className="color large"></div>
+        <h6>Secondary</h6>
         <div style={secondaryColorStyle} className="color"></div>   
       </div>
-
   )}
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import EditSwatch from '../EditSwatch/EditSwatch'
+import AddSwatch from '../AddSwatch/AddSwatch'
 import Preview from '../Preview/Preview'
 import ApiContext from '../ApiContext'
-import { Link } from 'react-router-dom'
+import { Link, Route, Switch} from 'react-router-dom'
 import {findSwatch} from '../swatches-helpers.js'
 
 export default class SwatchDetail extends React.Component {
@@ -11,13 +12,18 @@ export default class SwatchDetail extends React.Component {
       params: {}
     }
   }
+  static defaultProps = {
+    history: {
+      goBack: () => { }
+    },
+  }
   static contextType = ApiContext
 
   state = {
     error: null,
-    activeFontFamily: '',
-    color_primary: '',
-    color_secondary: '' 
+    activeFontFamily: 'Open Sans',
+    color_primary: '#efefef',
+    color_secondary: '#efefef' 
   }
 
   componentDidMount() {
@@ -27,7 +33,7 @@ export default class SwatchDetail extends React.Component {
     this.setState({
       color_primary: swatch.color_primary,
       color_secondary: swatch.color_secondary,
-      activeFontFamily: swatch.font_primary
+      font_primary: swatch.font_primary
     })
   }
 
@@ -40,23 +46,53 @@ export default class SwatchDetail extends React.Component {
   };
 
   render(){
-   
     const { swatches=[] } = this.context
     const { swatchId } = this.props.match.params
     const swatch = findSwatch(swatches, parseInt(swatchId)) || {content: ''}
+    console.log(swatch.font_primary)
+
     return(
       <section className='MainEditor'>
-        <Link to='/'>Back</Link>
-        <h2>{swatch.name}</h2>
+        <Link to='/' onClick={() => this.props.history.goBack()}> {`< Back`} </Link>
         <div className='container'>
-          <EditSwatch
-            id={swatch.id}
-            name={swatch.name}
-            color_primary={swatch.color_primary}
-            color_secondary={swatch.color_secondary}
-            onSelectPrimaryColor={this.handlePrimaryChange}
-            onSelectSecondaryColor={this.handleSecondaryChange}
-          />
+          <div className='entry'>
+            <Switch>
+            <Route 
+              exact
+              path="/swatch/new" 
+              render={(props) => 
+                <AddSwatch 
+                  onSelectPrimaryColor={this.handlePrimaryChange}
+                  onSelectSecondaryColor={this.handleSecondaryChange}
+                  history={this.props.history}
+                  id={swatch.id}
+                  name={swatch.name}
+                  color_primary={swatch.color_primary}
+                  color_secondary={swatch.color_secondary}
+                  activeFontFamily={swatch.font_primary} 
+              />}
+              
+            />
+            <Route
+              path="/swatch/:swatchId"
+              render={(props) => 
+                <EditSwatch 
+                  onSelectPrimaryColor={this.handlePrimaryChange}
+                  onSelectSecondaryColor={this.handleSecondaryChange} 
+                  history={this.props.history}
+                  id={swatch.id}
+                  name={swatch.name}
+                  color_primary={swatch.color_primary}
+                  color_secondary={swatch.color_secondary}
+                  font_primary={swatch.font_primary}
+                  value={swatch.value}
+                />}
+              
+            />
+          </Switch>
+          
+          </div>
+          
           <Preview
             id={swatch.id}
             name={swatch.name}
