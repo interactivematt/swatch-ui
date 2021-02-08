@@ -87,7 +87,7 @@ export default class AddSwatch extends React.Component {
   }
 
   render(){
-    console.log(`${this.context}`)
+
     const popover = {
       position: 'absolute',
       zIndex: '2',

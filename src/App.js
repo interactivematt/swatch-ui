@@ -21,31 +21,6 @@ class App extends Component {
     })
   }
 
-  addSwatch = swatch => {
-    this.setState({
-      swatches: [
-        ...this.state.swatches,
-        swatch
-      ]
-    })
-  };
-
-  updateSwatch = updatedSwatch => {
-    this.setState({
-      swatches: this.state.swatches.map(swatch =>
-        (swatch.id !== updatedSwatch.id) ? swatch : updatedSwatch
-      )
-    })
-  }
-
-  deleteSwatch = swatchId => {
-    const newSwatches = this.state.swatches.filter(swatch => swatch.id !== swatchId)
-    this.setState({
-      swatches: newSwatches
-    })
-    console.log(swatchId)
-  }
-
   componentDidMount() {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/swatches`, {
@@ -55,8 +30,10 @@ class App extends Component {
           'Authorization': `Bearer ${config.API_KEY}`
         }
       }),
+      
     ])
       .then(([swatchesRes]) => {
+        
         if(!swatchesRes.ok) {
           return swatchesRes.json().then(e => Promise.reject(e))
         }
@@ -64,14 +41,43 @@ class App extends Component {
           swatchesRes.json(),
         ])
       })
-      .then(this.setSwatches)
+      .then(([swatches]) => {
+        this.setState({ swatches })
+        console.log(this.state)
+      })
       .catch(error => {
         console.error({ error })
         this.setState({ error })
       })
-    
+      
   };
 
+  addSwatch = swatch => {
+    this.setState({
+      swatches: [
+        ...this.state.swatches,
+        swatch
+      ]
+    })
+  };
+
+  updateSwatch = newSwatch => {
+    this.setState({
+      swatches: this.state.swatches.map(swatch =>
+        (swatch.id !== newSwatch.id) ? swatch : newSwatch
+      )
+    })
+    console.log(`Swatch ${newSwatch.name} submitted`)
+    console.log(newSwatch.id)
+  }
+
+  deleteSwatch = swatchId => {
+    const newSwatches = this.state.swatches.filter(swatch => swatch.id !== swatchId)
+    this.setState({
+      swatches: newSwatches
+    })
+    console.log(swatchId)
+  }
 
   renderPages(){
     return(
@@ -98,13 +104,13 @@ class App extends Component {
   }
 
   render(){
-    console.log(this.state)
     const value = {
       swatches: this.state.swatches,
       addSwatch: this.addSwatch,
       updateSwatch: this.updateSwatch,
       deleteSwatch: this.deleteSwatch,
     }
+
     return(
       <ApiContext.Provider value={value}>
         <header>

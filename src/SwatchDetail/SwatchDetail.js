@@ -84,7 +84,7 @@ export default class SwatchDetail extends React.Component {
                   color_primary={swatch.color_primary}
                   color_secondary={swatch.color_secondary}
                   font_primary={swatch.font_primary}
-                  
+                  activeFontFamily={swatch.font_primary}
                 />}
               
             />
