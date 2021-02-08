@@ -6,6 +6,7 @@ import Login from './Login/Login'
 import SignUp from './SignUp/SignUp'
 import ApiContext from './ApiContext'
 import config from './config'
+import GoogleFontLoader from 'react-google-font-loader';
 import './App.css'
 
 class App extends Component {
@@ -72,11 +73,10 @@ class App extends Component {
   }
 
   deleteSwatch = swatchId => {
-    const newSwatches = this.state.swatches.filter(swatch => swatch.id !== swatchId)
+    const newSwatches = this.state.swatches.filter(bm => bm.id !== swatchId)
     this.setState({
       swatches: newSwatches
     })
-    console.log(swatchId)
   }
 
   renderPages(){
@@ -110,11 +110,16 @@ class App extends Component {
       updateSwatch: this.updateSwatch,
       deleteSwatch: this.deleteSwatch,
     }
+    
+    const fonts = this.state.swatches.map(v => ({font: v.font_primary}));
 
     return(
       <ApiContext.Provider value={value}>
+        <GoogleFontLoader
+          fonts={fonts}
+        />
         <header>
-          <h2><a href='/'>swatch ui</a></h2>
+          <h2 className='logo'><a href='/'>swatch ui</a></h2>
           <h4>Rapidly experiment with styling to generate quick swatches of your UI's look-and-feel.</h4>
         </header>
         {this.renderPages()}

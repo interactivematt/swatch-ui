@@ -1,5 +1,7 @@
 body{
   margin: 0 auto;
+  color: #263238;
+  
 }
 
 #root{
@@ -14,15 +16,16 @@ body{
 a, li, ul, ol{
   list-style-type: none;
   text-decoration: none;
-  color: black;
+  color: #263238;
 }
 
 h2 a:hover{
-  color: green;
+  color: #263238;
 }
 
 h1,h2,h3,h4,h5,h6{
   margin: .5rem auto;
+  
 }
 
 h1{
@@ -31,7 +34,7 @@ h1{
 }
 h2{
   font-size: 2.5rem;
-  font-weight: 200;
+  font-weight: 300;
 }
 h3{
   font-size: 1.5rem;
@@ -41,11 +44,12 @@ h4{
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 400;
+  font-family: 'Roboto Mono';
 }
 
 h6{
   font-size: .75rem;
-  color: gray;
+  color: #90a4ae;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-transform: uppercase;
   margin-top: 1rem;
@@ -55,8 +59,16 @@ p{
   line-height: 1.25rem;
 }
 
+.logo a{
+  color: #90a4ae;
+}
+
 nav a{
   margin-right: 1rem;
+}
+
+header{
+  margin: 4rem 0;
 }
 
 section{
@@ -67,17 +79,23 @@ label{
   display: block;
   margin: 1rem 0;
   width: 100%;
+  font-family: 'Roboto Mono';
 }
 
-input, select{
+input, select, button{
   display: block;
   height: 2.5rem;
   border-radius: 0.2rem;
   border: 1px solid #c5c5c5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   width: 100%;
   padding: 0 0.5rem;
   font-size: 1rem;
   margin-top: 0.5rem;
+ }
+
+ input:hover, select:hover, .dropdown-button:hover{
+   border: 1px solid #263238 !important;
  }
 
 .container{
@@ -100,6 +118,33 @@ section{
 
 .entry, .form{
   width: 100%;
+  text-transform: capitalize;
+}
+
+.buttons{
+  display: grid;
+  grid-auto-columns: max-content;
+  justify-content: space-between;
+  grid-auto-flow: column;
+}
+
+button{
+  font-weight: 600;
+  color: #263238;
+  border: none;
+  background: white;
+  border: 1px solid #cfd8dc;
+  padding: 0 1rem;
+}
+
+button:hover{
+  border: 1px solid #263238;
+  cursor: pointer;
+}
+
+.delete{
+  color: #AA3530;
+  border: 1px solid #cfd8dc;
 }
 
 .color{
@@ -141,9 +186,10 @@ section{
 
 .swatchCard{
   list-style-type: none;
+  text-transform: capitalize;
   width: 100%;
-  border: 1px solid lightgray;
-  padding: 0.5rem 1.5rem;
+  border: 1px solid #cfd8dc;
+  padding: 1.25rem 1.5rem .5rem;
   border-radius: .5rem;
   height: 100%;
 }
@@ -159,8 +205,17 @@ section{
   height: 4rem;
 }
 
+.swatchCard span{
+  visibility: hidden;
+  text-align: right;
+}
+
 .swatchCard:hover{
   border: 1px solid slategray;
+}
+
+.swatchCard:hover span{
+  visibility: visible;
 }
 
 @media screen and (min-width: 375px){

@@ -16,6 +16,7 @@ export default class EditSwatch extends React.Component {
       displayColorPicker: false
   }
   static defaultProps = {
+
     history: {
       push: () => { }
     },
@@ -81,9 +82,7 @@ export default class EditSwatch extends React.Component {
         return res.json().then(error => Promise.reject(error))
     })
     .then(() => {
-
       this.context.updateSwatch(newSwatch)
-
       this.props.history.push('/')
     })
     .catch(error => {
@@ -93,24 +92,25 @@ export default class EditSwatch extends React.Component {
   }
 
   handleClickDelete = e => {
-    e.preventDefault()
-    const swatchId = JSON.parse(this.props.id);
+    e.preventDefault();
+    const swatchId = parseInt(this.state.id)
+    
     fetch(`${config.API_ENDPOINT}/swatches/${swatchId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
         'Authorization': `Bearer ${config.API_KEY}`
       },
+      
     })
       .then(res => {
-        if (!res.ok)
+        if (!res.ok){
           return res.json().then(e => Promise.reject(e))
-        return res.json()
+        }
       })
-      .then(swatchId => {
-        this.props.history.push(`/`)
+      .then(() => {
         this.context.deleteSwatch(swatchId)
-        // allow parent to perform extra behaviour
+        this.props.history.push('/')
       })
       .catch(error => {
         console.error({ error })
@@ -132,7 +132,6 @@ export default class EditSwatch extends React.Component {
     const styles = {
       fontStyle: { fontFamily: `${this.props.font_primary}`}
     }
-
     const { fontStyle } = styles
 
     return(
@@ -190,15 +189,24 @@ export default class EditSwatch extends React.Component {
             }
           />
         </label>
+        <div className="buttons">
+          
+          <button
+            onClick={this.handleClickDelete}
+            type='button'
+            className='delete'
+          >
+            Delete
+          </button>
+          <button
+            type='submit'
+            className='submit'
+          >
+            Save Swatch
+          </button>
+          
+        </div>
         
-        <input type="submit" value="Save Swatch" />
-        <button
-          onClick={this.handleClickDelete}
-          type='button'
-          className='delete'
-        >
-          Delete
-        </button>
       </Form>
     )
 

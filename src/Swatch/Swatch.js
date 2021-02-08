@@ -11,7 +11,6 @@ export default class Swatch extends React.Component {
   static contextType = ApiContext
   
   render(){
-    console.log(this.props.font_primary)
     const { swatches=[] } = this.context
     const { id } = this.props
     const swatch = findSwatch(swatches, parseInt(id)) || {content: ''}
@@ -30,11 +29,12 @@ export default class Swatch extends React.Component {
     const { primaryColorStyle, secondaryColorStyle, fontStyle } = styles;
     return(
       <div style={fontStyle} className={"swatchCard apply-font"}>
-        <h6>Swatch</h6>
+        
         <h3>{swatch.name}</h3>
         <p style={fontStyle}>{swatch.font_primary}</p>
         <div style={primaryColorStyle} className="color large"></div>
         <div style={secondaryColorStyle} className="color"></div>
+        <span><h6>View Swatch</h6></span>
       </div>
     )
   }

@@ -155,7 +155,12 @@ export default class AddSwatch extends React.Component {
           />
         </label>
         
-        <input type="submit" value="Save Swatch" />
+        <button
+            type='submit'
+            className='submit'
+          >
+            Save Swatch
+          </button>
       </Form>
     )
 
