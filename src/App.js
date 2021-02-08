@@ -44,7 +44,6 @@ class App extends Component {
       })
       .then(([swatches]) => {
         this.setState({ swatches })
-        console.log(this.state)
       })
       .catch(error => {
         console.error({ error })
@@ -69,7 +68,6 @@ class App extends Component {
       )
     })
     console.log(`Swatch ${newSwatch.name} submitted`)
-    console.log(newSwatch.id)
   }
 
   deleteSwatch = swatchId => {
@@ -113,10 +111,17 @@ class App extends Component {
     
     const fonts = this.state.swatches.map(v => ({font: v.font_primary}));
 
+    const uniqueFonts = Array.from(new Set(fonts.map(x => x.font)))
+      .map(font_primary => {
+        return{
+          font: font_primary
+        };
+      });
+
     return(
       <ApiContext.Provider value={value}>
         <GoogleFontLoader
-          fonts={fonts}
+          fonts={uniqueFonts}
         />
         <header>
           <h2 className='logo'><a href='/'>swatch ui</a></h2>

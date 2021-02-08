@@ -44,7 +44,8 @@ h4{
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 400;
-  font-family: 'Roboto Mono';
+  font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
+  font-family: ;
 }
 
 h6{
@@ -79,7 +80,7 @@ label{
   display: block;
   margin: 1rem 0;
   width: 100%;
-  font-family: 'Roboto Mono';
+  font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
 }
 
 input, select, button{
